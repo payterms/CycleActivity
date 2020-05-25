@@ -1,19 +1,14 @@
 package ru.payts.cycleactivity;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-    SomeFragment fragment;
-    Button fragmentButton;
 
     private String TAG = "[CycleActivity]";
     private TextView firstRunTextView;
@@ -29,39 +24,7 @@ public class MainActivity extends AppCompatActivity {
             firstRunTextView.setText("Повторный запуск!");
         }
         makeMessage("onCreate()");
-
-        fragmentButton = (Button) findViewById(R.id.buttonFragment);
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        fragment = new SomeFragment();
-
-        fragmentTransaction.add(R.id.container, fragment).commit();
-
-        fragmentButton.setOnClickListener(onButtonClickListener);
     }
-
-    Button.OnClickListener onButtonClickListener = new Button.OnClickListener() {
-
-        @Override
-        public void onClick(View v) {
-            // TODO Auto-generated method stub
-            SomeFragment newFragment = null;
-
-            newFragment = new SomeFragment();
-
-            // Create new transaction
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-
-            // Replace whatever is in the fragment_container view with this fragment,
-            // and add the transaction to the back stack
-            transaction.replace(R.id.container, newFragment);
-            transaction.addToBackStack(null);
-
-            // Commit the transaction
-            transaction.commit();
-        }
-    };
 
     @Override
     protected void onStart() {
